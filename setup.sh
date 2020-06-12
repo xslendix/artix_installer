@@ -117,7 +117,7 @@ echo "pacman -S connman-openrc connman-gtk --noconfirm; rc-update add connmand" 
 echo "Unmounting partitions..."
 umount -R /mnt
 
-echo "Installation done! Please run post.sh when booted into artix!"
+echo "Installation done! Please run post.sh when booted into artix (as root user not '${username}')!"
 
 echo "Press any key to reboot."
 read -n 1 -s
