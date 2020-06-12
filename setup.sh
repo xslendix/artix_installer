@@ -15,7 +15,7 @@ fi
 echo -n "Are you installing on a laptop? [y/N]: "
 read -n1 laptop
 
-if [ $laptop = "y" ]; then
+if [ "$laptop" = "y" ]; then
 	laptop=true
 else
 	laptop=false
