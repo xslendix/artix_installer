@@ -52,7 +52,7 @@ bash
 echo "Mounting partitions..."
 
 echo -n "Mounting ROOT... "
-if [ -d "/dev/disk/by-label/ROOT" ]; then
+if [ -e "/dev/disk/by-label/ROOT" ]; then
 	mount /dev/disk/by-label/ROOT /mnt
 	echo "[  DONE  ]"
 else
@@ -65,7 +65,7 @@ mkdir /mnt/boot
 mkdir /mnt/home
 
 echo -n "Mounting HOME... "
-if [ -d "/dev/disk/by-label/HOME" ]; then
+if [ -e "/dev/disk/by-label/HOME" ]; then
 	mount /dev/disk/by-label/HOME /mnt/home
 	echo "[  DONE  ]"
 else
@@ -73,7 +73,7 @@ else
 fi
 
 echo -n "Mounting BOOT... "
-if [ -d "/dev/disk/by-label/BOOT" ]; then
+if [ -e "/dev/disk/by-label/BOOT" ]; then
 	mount /dev/disk/by-label/BOOT /mnt/boot
 	echo "[  DONE  ]"
 else
