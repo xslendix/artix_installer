@@ -79,3 +79,21 @@ else
 	exit 1
 fi
 
+pacman -Syy
+
+echo "Installing base system..."
+basestrap /mnt base base-devel openrc
+
+echo "Installing the Linux kernel..."
+basestrap /mnt linux linux-firmware
+
+echo "Generating fstab..."
+fstabgen -U /mnt >>/mnt/etc/fstab
+
+
+
+
+
+
+
+
