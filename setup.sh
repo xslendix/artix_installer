@@ -30,13 +30,16 @@ echo -n "User password: "
 stty -echo
 read password
 stty echo
+echo ""
 
 echo -n "Root password: "
 stty -echo
 read root_password
 stty echo
+echo ""
 
-echo "Now you will need to make the partitions.\nSwap not recommended."
+echo -e "Now you will need to make the partitions.\nSwap not recommended."
+echo "Press any key to continue."
 read -n 1 -s
 
 cfdisk /dev/sda
