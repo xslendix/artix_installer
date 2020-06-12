@@ -5,7 +5,7 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-if ping -q -w 1 -c 1 google.com > /dev/null then
+if ping -q -w 1 -c 1 google.com > /dev/null; then
     echo "Online! Continuing setup..."
 else
     echo "Offline! Quitting..."
@@ -15,7 +15,7 @@ fi
 echo -n "Are you installing on a laptop? [y/N]: "
 read -n1 laptop
 
-if [ $laptop = "y" ] then
+if [ $laptop = "y" ]; then
 	laptop=true
 else
 	laptop=false
@@ -49,7 +49,7 @@ bash
 echo "Mounting partitions..."
 
 echo -n "Mounting ROOT... "
-if [ -d /dev/disk/by-label/ROOT ]
+if [ -d /dev/disk/by-label/ROOT ]; then
 	mount /dev/disk/by-label/ROOT /mnt
 	echo "[  DONE  ]"
 else
@@ -62,7 +62,7 @@ mkdir /mnt/boot
 mkdir /mnt/home
 
 echo -n "Mounting HOME... "
-if [ -d /dev/disk/by-label/HOME ] then
+if [ -d /dev/disk/by-label/HOME ]; then
 	mount /dev/disk/by-label/HOME /mnt/home
 	echo "[  DONE  ]"
 else
@@ -70,7 +70,7 @@ else
 fi
 
 echo -n "Mounting BOOT... "
-if [ -d /dev/disk/by-label/BOOT ] then
+if [ -d /dev/disk/by-label/BOOT ]; then
 	mount /dev/disk/by-label/BOOT /mnt/boot
 	echo "[  DONE  ]"
 else
