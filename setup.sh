@@ -107,6 +107,7 @@ echo "Adding user ${username}..."
 echo "useradd -m ${username}; stty -echo; echo -e '${password}\n${password}' | passwd ${username}; stty echo" | artools-chroot /mnt
 echo "usermod -aG wheel ${username}" | artools-chroot /mnt
 
+echo "chmod +w /etc/sudoers" | artools-chroot /mnt
 echo "echo 'Defaults	insults' > /etc/sudoers" | artools-chroot /mnt
 echo "echo 'root ALL=(ALL) ALL' >> /etc/sudoers" | artools-chroot /mnt
 echo "echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers" | artools-chroot /mnt
