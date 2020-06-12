@@ -12,15 +12,6 @@ else
     exit 1
 fi
 
-echo -n "Are you installing on a laptop? [y/N]: "
-read -n1 laptop
-
-if [ "$laptop" = "y" ]; then
-	laptop=true
-else
-	laptop=false
-fi
-
 echo "Laptop is now equal to ${laptop}."
 
 echo -n "Username: "
