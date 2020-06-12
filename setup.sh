@@ -118,10 +118,13 @@ echo "echo ${hostname} > /etc/hostname" | artools-chroot /mnt
 echo "pacman -S dhcpcd --noconfirm" | artools-chroot /mnt
 
 echo "Installing connman..."
+
 echo "pacman -S connman-openrc connman-gtk --noconfirm; rc-update add connmand" | artools-chroot /mnt
 
+{
 echo "Unmounting partitions..."
 umount -R /mnt
+} || {}
 
 echo "Installation done! Please run post.sh when booted into artix (as root user not '${username}')!"
 
