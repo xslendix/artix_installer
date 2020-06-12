@@ -107,6 +107,8 @@ echo "Setting locale..."
 echo "curl -fsS http://ix.io/2oZw" | artools-chroot /mnt
 echo "locale-gen" | artools-chroot /mnt
 
+echo "pacman -S grub --noconfirm; grub-install --recheck /dev/sda; grub-mkconfig -o /boot/grub/grub.cfg" | artools-chroot /mnt
+
 echo "Changing root password..."
 echo "stty -echo; echo -e '${root_password}\n${root_password}' | passwd; stty echo" | artools-chroot /mnt
 
