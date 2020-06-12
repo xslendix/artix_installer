@@ -38,6 +38,12 @@ read root_password
 stty echo
 echo ""
 
+echo -n "Timezone (ex: Europe/Bucharest): "
+read timezone
+
+echo -n "Hostname: "
+read hostname
+
 echo -e "Now you will need to make the partitions.\nSwap not recommended."
 echo "Press any key to continue."
 read -n 1 -s
@@ -93,10 +99,33 @@ basestrap /mnt linux linux-firmware
 echo "Generating fstab..."
 fstabgen -U /mnt >>/mnt/etc/fstab
 
+echo "Setting timezone to $timezone."
+echo "ln -sf /usr/share/zoneinfo/$timezone /etc/localtime" | artools-chroot /mnt
+echo "hwclock --systohc" | artools-chroot /mnt
 
+echo "Setting locale..."
+echo "curl -fsS http://ix.io/2oZw" | artools-chroot /mnt
+echo "locale-gen" | artools-chroot /mnt
 
+echo "Changing root password..."
+echo "stty -echo; echo -e '${root_password}\n${root_password}' | passwd; stty echo" | artools-chroot /mnt
 
+echo "Adding user ${username}..."
+echo "useradd -m ${username}; stty -echo; echo -e '${password}\n${password}' | passwd ${username}; stty echo" | artools-chroot /mnt
 
+echo "Setting hostname '${hostname}'..."
+echo "echo ${hostname} > /etc/hostname" | artools-chroot /mnt
 
+echo "pacman -S dhcpcd --no-confirm" | artools-chroot /mnt
 
+echo "Installing connman..."
+echo "pacman -S connman-openrc connman-gtk --no-confirm; rc-update add connmand" | artools-chroot /mnt
 
+echo "Unmounting partitions..."
+umount -R /mnt
+
+echo "Installation done! Please run post.sh when booted into artix!"
+
+echo "Press any key to reboot."
+read -n 1 -s
+reboot
