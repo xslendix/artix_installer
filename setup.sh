@@ -18,19 +18,19 @@ echo -n "Username: "
 read username
 
 echo -n "User password: "
-stty -echo
-read password
-stty echo
+read -s password
 echo ""
 
 echo -n "Root password: "
-stty -echo
-read root_password
-stty echo
+read -s root_password
 echo ""
 
-echo -n "Timezone (ex: Europe/Bucharest): "
+echo -n "Timezone [Europe/Bucharest]: "
 read timezone
+
+if [ "$timezone" = "" ]; then
+	timezone="Europe/Bucharest"
+fi
 
 echo -n "Hostname: "
 read hostname
