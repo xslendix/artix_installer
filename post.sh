@@ -92,7 +92,9 @@ echo "Installing LightDM..."
 pacman -S lightdm lightm-gtk-greeter lightdm-openrc
 
 echo "Adding LightDM"
-rc-update add lightdm
+rc-update add dbus default
+rc-update add xdm default
+rc-update add lightdm default
 
 echo "Installing fish..."
 pacman -S fish --noconfirm
