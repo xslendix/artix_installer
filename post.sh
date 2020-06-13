@@ -129,10 +129,20 @@ echo "Configuring NeoVim..."
 echo "Configuring ranger..."
 # TODO: Add configuration steps here!
 
-if $nvidiaq; then
-	if $noptimus; then
-		echo "Configuring nVidia Optimus..."
-		echo "Section "OutputClass"
+echo "Configuring LightDM..."
+		echo "[LightDM]
+logind-check-graphical=true
+run-directory=/run/lightdm
+[Seat:*]
+greeter-session=lightdm-gtk-greeter     
+session-wrapper=/etc/lightdm/Xsession
+[XDMCPServer]
+[VNCServer]
+" > /etc/lightdm/lightdm.conf
+
+if $noptimus; then
+	echo "Configuring nVidia Optimus..."
+	echo "Section "OutputClass"
     Identifier "intel"
     MatchDriver "i915"
     Driver "modesetting"
@@ -148,46 +158,23 @@ Section "OutputClass"
     ModulePath "/usr/lib/xorg/modules"
 EndSection" > /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 
-		sed -i '1s/^/xrandr --dpi 96\n/' /home/$username/.xinitrc
-		sed -i '1s/^/xrandr --auto\n/' /home/$username/.xinitrc
-		sed -i '1s/^/xrandr --setprovideroutputsource modesetting NVIDIA-0\n/' /home/$username/.xinitrc
+	sed -i '1s/^/xrandr --dpi 96\n/' /home/$username/.xinitrc
+	sed -i '1s/^/xrandr --auto\n/' /home/$username/.xinitrc
+	sed -i '1s/^/xrandr --setprovideroutputsource modesetting NVIDIA-0\n/' /home/$username/.xinitrc
 
-		echo "#!/bin/sh
+	echo "#!/bin/sh
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto" > /etc/lightdm/display_setup.sh
-		chmod +x /etc/lightdm/display_setup.sh
+	chmod +x /etc/lightdm/display_setup.sh
 
-		echo "Configuing LightDM..."
-		echo "[LightDM]
-logind-check-graphical=true
-run-directory=/run/lightdm
-[Seat:*]
-greeter-session=lightdm-gtk-greeter     
-session-wrapper=/etc/lightdm/Xsession   
-display-setup-script=/etc/lightdm/display_setup.sh
-[XDMCPServer]
-[VNCServer]
-" > /etc/lightdm/lightdm.conf
-	else
-		echo "Configuring LightDM..."
-		echo "[LightDM]
-logind-check-graphical=true
-run-directory=/run/lightdm
-[Seat:*]
-greeter-session=lightdm-gtk-greeter     
-session-wrapper=/etc/lightdm/Xsession   
-[XDMCPServer]
-[VNCServer]
-" > /etc/lightdm/lightdm.conf
-	fi
-else
-	echo "Configuring LightDM..."
+	echo "Configuing LightDM..."
 	echo "[LightDM]
 logind-check-graphical=true
 run-directory=/run/lightdm
 [Seat:*]
 greeter-session=lightdm-gtk-greeter     
 session-wrapper=/etc/lightdm/Xsession   
+display-setup-script=/etc/lightdm/display_setup.sh
 [XDMCPServer]
 [VNCServer]
 " > /etc/lightdm/lightdm.conf
