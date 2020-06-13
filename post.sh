@@ -228,7 +228,7 @@ pacman -U *.tar.xz
 
 chown -R $username /home/${username}/.config
 
-
+rm /home/$username/post.sh
 
 
 
