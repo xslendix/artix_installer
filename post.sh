@@ -98,7 +98,6 @@ pacman -S lightdm lightm-gtk-greeter displaymanager-openrc
 echo "Adding LightDM"
 rc-update add dbus default
 rc-update add xdm default
-rc-update add lightdm default
 
 echo "Installing fish..."
 pacman -S fish --noconfirm
