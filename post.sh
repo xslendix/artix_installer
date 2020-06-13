@@ -56,6 +56,9 @@ pacman -S vim --noconfirm
 echo "Installing i3-gaps, polybar, dmenu, xcompmgr and feh..."
 pacman -S i3-gaps i3lock i3status polybar dmenu xcompmgr feh xfce4-clipman-plugin xfce4-screenshooter --noconfirm
 
+echo "Getting background image..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
+
 echo "Configuring i3..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/i3/config > /home/$username/.config/i3/config
 
@@ -82,8 +85,20 @@ pacman -S fish --noconfirm
 echo "Configuring fish..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/fish/config.fish > /home/$username/.config/fish/config.fish
 
+echo "Installing dash"
+sudo pacman -S dash --noconfirm
+
+echo "Replacing /bin/sh with dash"
+ln -s dash /bin/sh
+
 echo "Installing git and other essentials..."
 pacman -S git python python-pip pyalpm firefox ranger mpv  --noconfirm
+
+echo "Installing NeoVim..."
+pip install neovim
+
+echo "Configuring NeoVim..."
+# TODO: Add configuration steps here!
 
 echo "Configuring ranger..."
 # TODO: Add configuration steps here!
@@ -173,8 +188,6 @@ vim PKGBUILD
 echo "Installing pikaur..."
 makepkg -si
 
-echo "Getting background image..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
 
 
 
