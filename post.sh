@@ -17,7 +17,6 @@ else
     exit 1
 fi
 
-
 echo -n "Are you installing on a laptop? [y/N]: "
 read -n1 laptop
 
@@ -38,7 +37,17 @@ else
 	laptop=false
 fi
 
+echo -n "Using nvidia? [y/N]: "
+read -n1 nvidiaq
+
+if [ "$nvidiaq" = "y" ]; then
+	nvidiaq=true
+else
+	nvidiaq=false
+fi
+
 echo "Installing on laptop: ${laptop}"
+echo "Installing with nVidia: ${nvidiaq}"
 echo "Installing with nVidia Optimus: ${noptimus}"
 
 echo "Updating..."
@@ -108,10 +117,10 @@ echo "Configuring NeoVim..."
 
 echo "Configuring ranger..."
 # TODO: Add configuration steps here!
-
-if $noptimus; then
-	echo "Configuring nVidia Optimus"
-	echo "Section "OutputClass"
+if $nvidiaq; then
+	if $noptimus; then
+		echo "Configuring nVidia Optimus"
+		echo "Section "OutputClass"
     Identifier "intel"
     MatchDriver "i915"
     Driver "modesetting"
@@ -127,17 +136,17 @@ Section "OutputClass"
     ModulePath "/usr/lib/xorg/modules"
 EndSection" > /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 
-	sed -i '1s/^/xrandr --dpi 96\n/' /home/$username/.xinitrc
-	sed -i '1s/^/xrandr --auto\n/' /home/$username/.xinitrc
-	sed -i '1s/^/xrandr --setprovideroutputsource modesetting NVIDIA-0\n/' /home/$username/.xinitrc
-	
-	echo "#!/bin/sh
+		sed -i '1s/^/xrandr --dpi 96\n/' /home/$username/.xinitrc
+		sed -i '1s/^/xrandr --auto\n/' /home/$username/.xinitrc
+		sed -i '1s/^/xrandr --setprovideroutputsource modesetting NVIDIA-0\n/' /home/$username/.xinitrc
+
+		echo "#!/bin/sh
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto" > /etc/lightdm/display_setup.sh
-	chmod +x /etc/lightdm/display_setup.sh
-	
-	echo "Configuing LightDM"
-	echo "[LightDM]
+		chmod +x /etc/lightdm/display_setup.sh
+
+		echo "Configuing LightDM"
+		echo "[LightDM]
 logind-check-graphical=true
 run-directory=/run/lightdm
 [Seat:*]
@@ -147,6 +156,18 @@ display-setup-script=/etc/lightdm/display_setup.sh
 [XDMCPServer]
 [VNCServer]
 " > /etc/lightdm/lightdm.conf
+	else
+		echo "Configuring LightDM"
+		echo "[LightDM]
+logind-check-graphical=true
+run-directory=/run/lightdm
+[Seat:*]
+greeter-session=lightdm-gtk-greeter     
+session-wrapper=/etc/lightdm/Xsession   
+[XDMCPServer]
+[VNCServer]
+" > /etc/lightdm/lightdm.conf
+	fi
 else
 	echo "Configuring LightDM"
 	echo "[LightDM]
@@ -170,10 +191,10 @@ echo "Cd-ing in /tmp/st"
 cd /tmp/st
 
 echo "Downloading patch file..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/st.patch > st.patch
-
-echo "Applying patch..."
-patch st.patch
+if curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/st.patch > st.patch; then
+	echo "Applying patch..."
+	patch st.patch
+fi
 
 echo "Compiling st..."
 make
