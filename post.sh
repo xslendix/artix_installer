@@ -132,6 +132,9 @@ curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/con
 echo "Configuring polybar"
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/polybar/config > /home/$username/.config/polybar/config
 
+echo "Configuring fish..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/fish/config.fish > /home/$username/.config/fish/config.fish
+
 echo "Getting background image..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
 
