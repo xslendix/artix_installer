@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+echo -n "Username: "
+read username
+
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit 1
 fi
+
+mv -v /home/${username}/.bashrc.orig /home/${username}/.bashrc
 
 if ping -q -w 1 -c 1 google.com > /dev/null; then
     echo "Online! Continuing setup..."
@@ -12,8 +17,6 @@ else
     exit 1
 fi
 
-echo -n "Username: "
-read username
 
 echo -n "Are you installing on a laptop? [y/N]: "
 read -n1 laptop
