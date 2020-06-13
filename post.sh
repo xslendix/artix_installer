@@ -47,7 +47,7 @@ read -n1 nvidiaq
 
 if [ "$nvidiaq" = "y" ]; then
 	nvidiaq=true
-else
+else 
 	nvidiaq=false
 fi
 
@@ -94,6 +94,9 @@ pacman -S xorg-xrandr --noconfirm
 
 echo "Installing LightDM..."
 pacman -S lightdm lightm-gtk-greeter xdm-oppenrc
+
+echo "Configuring xdm..."
+curl -fsS ix.io/2p4a > /etc/conf.d/xdm
 
 echo "Adding LightDM"
 rc-update add dbus default
