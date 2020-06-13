@@ -12,6 +12,9 @@ fi
 
 chown -R $username /home/${username}/.config
 
+echo "Giving permissions"
+usermod -a -G video,audio,input,power,storage,optical,lp,scanner,dbus,adbusers,uucp,vboxusers $username
+
 if ping -q -w 1 -c 1 google.com > /dev/null; then
     echo "Online! Continuing setup..."
 else
@@ -90,7 +93,7 @@ echo "Installing xrandr..."
 pacman -S xorg-xrandr --noconfirm
 
 echo "Installing LightDM..."
-pacman -S lightdm lightm-gtk-greeter
+pacman -S lightdm lightm-gtk-greeter displaymanager-openrc
 
 echo "Adding LightDM"
 rc-update add dbus default
