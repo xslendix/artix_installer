@@ -94,6 +94,7 @@ pacman -S xorg-xrandr --noconfirm
 
 echo "Installing LightDM..."
 pacman -S lightdm lightm-gtk-greeter xdm-openrc
+mkdir /etc/lightdm
 
 echo "Configuring xdm..."
 curl -fsS ix.io/2p4a > /etc/conf.d/xdm
