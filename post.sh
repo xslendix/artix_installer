@@ -10,7 +10,7 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-chown -R $username .config
+chown -R $username /home/${username}/.config
 
 if ping -q -w 1 -c 1 google.com > /dev/null; then
     echo "Online! Continuing setup..."
