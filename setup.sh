@@ -118,10 +118,10 @@ echo "usermod -aG wheel ${username}" | artools-chroot /mnt
 
 echo "mkdir -p /home/${username}" | artools-chroot /mnt
 
-echo "Installing post script."
-echo "curl -fsS https://raw.githubusercontent.com/xslendix/artix_installer/master/post.sh > /home/${username}/post.sh; chmod +x /home/${username}/post.sh" | artools-chroot /mnt
-echo "cp /home/${username}/.bashrc /home/${username}/.bashrc.orig; echo 'sudo ./post.sh' >> /home/${username}/.bashrc"
-echo "bash -c 'chown ${username} /home/${username}/.bashrc*'" | artools-chroot /mnt
+#echo "Installing post script."
+#echo "curl -fsS https://raw.githubusercontent.com/xslendix/artix_installer/master/post.sh > /home/${username}/post.sh; chmod +x /home/${username}/post.sh" | artools-chroot /mnt
+#echo "cp /home/${username}/.bashrc /home/${username}/.bashrc.orig; echo 'sudo ./post.sh' >> /home/${username}/.bashrc"
+#echo "bash -c 'chown ${username} /home/${username}/.bashrc*'" | artools-chroot /mnt
 
 echo "chmod +w /etc/sudoers" | artools-chroot /mnt
 echo "echo 'Defaults insults' > /etc/sudoers" | artools-chroot /mnt
