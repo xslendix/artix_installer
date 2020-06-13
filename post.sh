@@ -218,6 +218,7 @@ echo "Opening PKGBUILD..."
 vim PKGBUILD
 
 echo "Installing pikaur..."
+chown -R $username .
 su $username bash -c "makepkg -si"
 
 
