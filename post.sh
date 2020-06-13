@@ -219,10 +219,14 @@ cd pikaur
 echo "Opening PKGBUILD..."
 vim PKGBUILD
 
+chown -R $username /home/${username}/.config
+
 echo "Installing pikaur..."
 chown -R $username .
 su $username bash -c "makepkg -si"
+pacman -U *.tar.xz
 
+chown -R $username /home/${username}/.config
 
 
 
