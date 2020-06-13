@@ -3,12 +3,14 @@
 echo -n "Username: "
 read username
 
-mv -v /home/${username}/.bashrc.orig /home/${username}/.bashrc
+#mv -v /home/${username}/.bashrc.orig /home/${username}/.bashrc
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit 1
 fi
+
+chown -R $username .config
 
 if ping -q -w 1 -c 1 google.com > /dev/null; then
     echo "Online! Continuing setup..."
