@@ -90,7 +90,7 @@ echo "Installing xrandr..."
 pacman -S xorg-xrandr --noconfirm
 
 echo "Installing LightDM..."
-pacman -S lightdm lightm-gtk-greeter lightdm-openrc
+pacman -S lightdm lightm-gtk-greeter
 
 echo "Adding LightDM"
 rc-update add dbus default
