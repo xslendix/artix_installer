@@ -64,13 +64,14 @@ else
 	echo "/etc/X11/xorg.conf could not be copied! It either doesn't exist or the disk has a problem. Abandoning nVidia config!"
 fi
 
-echo "Installing xrandr"
-pacman -S xorg-xrandr
+echo "Installing xrandr..."
+pacman -S xorg-xrandr --noconfirm
 
-echo "Installing fish"
-pacman -S fish
+echo "Installing fish..."
+pacman -S fish --noconfirm
 
-
+echo "Installing git..."
+pacman -S git --noconfirm
 
 if $noptimus; then
 	echo "Configuring nVidia Optimus"
@@ -134,6 +135,24 @@ curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/con
 
 echo "Configuring fish..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/fish/config.fish > /home/$username/.config/fish/config.fish
+
+echo "Cloning st..."
+git clone --depth 1 https://github.com/LukeSmithxyz/st /tmp/st
+
+echo "Cd-ing in /tmp/st"
+cd /tmp/st
+
+echo "Downloading patch file..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/st.patch > st.patch
+
+echo "Applying patch..."
+patch st.patch
+
+echo "Compiling st..."
+make
+
+echo "Installing st..."
+make install
 
 echo "Getting background image..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
