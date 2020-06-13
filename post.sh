@@ -67,6 +67,11 @@ fi
 echo "Installing xrandr"
 pacman -S xorg-xrandr
 
+echo "Installing fish"
+pacman -S fish
+
+
+
 if $noptimus; then
 	echo "Configuring nVidia Optimus"
 	echo "Section "OutputClass"
@@ -118,7 +123,17 @@ session-wrapper=/etc/lightdm/Xsession
 " > /etc/lightdm/lightdm.conf
 fi
 
+echo "Making configuration directories"
+mkdir -p /home/$username/.config/{i3,fish,polybar}
 
+echo "Configuring i3..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/i3/config > /home/$username/.config/i3/config
+
+echo "Configuring polybar"
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/polybar/config > /home/$username/.config/polybar/config
+
+echo "Getting background image..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
 
 
 
