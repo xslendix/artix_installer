@@ -9,6 +9,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 mv -v /home/${username}/.bashrc.orig /home/${username}/.bashrc
+chown slendi /home/${username}/.bashrc
 
 if ping -q -w 1 -c 1 google.com > /dev/null; then
     echo "Online! Continuing setup..."
