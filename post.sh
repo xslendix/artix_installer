@@ -56,9 +56,6 @@ pacman -Syyu --noconfirm
 echo "Installing Xorg..."
 pacman -S xorg --ignore xorg-server-xdmx --noconfirm
 
-echo "Installing nvidia drivers..."
-pacman -S nvidia-lts --noconfirm
-
 echo "Installing vim..."
 pacman -S vim --noconfirm
 
@@ -74,15 +71,17 @@ curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/con
 echo "Configuring polybar"
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/polybar/config > /home/$username/.config/polybar/config
 
-echo "Installing nvidia drivers..."
-pacman -S nvidia --noconfirm
+if $nvidiaq; then
+	echo "Installing nvidia drivers..."
+	pacman -S nvidia --noconfirm
 
-echo "Backing up xconfig..."
-if cp -v /etc/X11/xorg.conf /etc/X11/xorg.conf.old; then
-	echo "Configuring nVidia drivers..."
-	nvidia-xconfig
-else
-	echo "/etc/X11/xorg.conf could not be copied! It either doesn't exist or the disk has a problem. Abandoning nVidia config!"
+	echo "Backing up xconfig..."
+	if cp -v /etc/X11/xorg.conf /etc/X11/xorg.conf.old; then
+		echo "Configuring nVidia drivers..."
+		nvidia-xconfig
+	else
+		echo "/etc/X11/xorg.conf could not be copied! It either doesn't exist or the disk has a problem. Abandoning nVidia config!"
+	fi
 fi
 
 echo "Installing xrandr..."
@@ -119,6 +118,7 @@ echo "Configuring NeoVim..."
 
 echo "Configuring ranger..."
 # TODO: Add configuration steps here!
+
 if $nvidiaq; then
 	if $noptimus; then
 		echo "Configuring nVidia Optimus"
