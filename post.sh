@@ -68,7 +68,7 @@ curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.
 echo "Configuring i3..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/i3/config > /home/$username/.config/i3/config
 
-echo "Configuring polybar"
+echo "Configuring polybar..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/polybar/config > /home/$username/.config/polybar/config
 
 if $nvidiaq; then
@@ -101,10 +101,13 @@ pacman -S fish --noconfirm
 echo "Configuring fish..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/fish/config.fish > /home/$username/.config/fish/config.fish
 
-echo "Installing dash"
+echo "Setting fish as default shell..."
+chsh $username -s /usr/bin/fish
+
+echo "Installing dash..."
 sudo pacman -S dash --noconfirm
 
-echo "Replacing /bin/sh with dash"
+echo "Replacing /bin/sh with dash..."
 ln -s dash /bin/sh
 
 echo "Installing git and other essentials..."
@@ -121,7 +124,7 @@ echo "Configuring ranger..."
 
 if $nvidiaq; then
 	if $noptimus; then
-		echo "Configuring nVidia Optimus"
+		echo "Configuring nVidia Optimus..."
 		echo "Section "OutputClass"
     Identifier "intel"
     MatchDriver "i915"
@@ -147,7 +150,7 @@ xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto" > /etc/lightdm/display_setup.sh
 		chmod +x /etc/lightdm/display_setup.sh
 
-		echo "Configuing LightDM"
+		echo "Configuing LightDM..."
 		echo "[LightDM]
 logind-check-graphical=true
 run-directory=/run/lightdm
@@ -159,7 +162,7 @@ display-setup-script=/etc/lightdm/display_setup.sh
 [VNCServer]
 " > /etc/lightdm/lightdm.conf
 	else
-		echo "Configuring LightDM"
+		echo "Configuring LightDM..."
 		echo "[LightDM]
 logind-check-graphical=true
 run-directory=/run/lightdm
@@ -171,7 +174,7 @@ session-wrapper=/etc/lightdm/Xsession
 " > /etc/lightdm/lightdm.conf
 	fi
 else
-	echo "Configuring LightDM"
+	echo "Configuring LightDM..."
 	echo "[LightDM]
 logind-check-graphical=true
 run-directory=/run/lightdm
@@ -183,13 +186,13 @@ session-wrapper=/etc/lightdm/Xsession
 " > /etc/lightdm/lightdm.conf
 fi
 
-echo "Making configuration directories"
+echo "Making configuration directories..."
 mkdir -p /home/$username/.config/{i3,fish,polybar}
 
 echo "Cloning st..."
 git clone --depth 1 https://github.com/LukeSmithxyz/st /tmp/st
 
-echo "Cd-ing in /tmp/st"
+echo "Cd-ing in /tmp/st..."
 cd /tmp/st
 
 echo "Downloading patch file..."
