@@ -53,6 +53,12 @@ pacman -S vim --noconfirm
 echo "Installing i3-gaps, polybar, dmenu, xcompmgr and feh..."
 pacman -S i3-gaps i3lock i3status polybar dmenu xcompmgr feh xfce4-clipman-plugin xfce4-screenshooter --noconfirm
 
+echo "Configuring i3..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/i3/config > /home/$username/.config/i3/config
+
+echo "Configuring polybar"
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/polybar/config > /home/$username/.config/polybar/config
+
 echo "Installing nvidia drivers..."
 pacman -S nvidia --noconfirm
 
@@ -70,8 +76,14 @@ pacman -S xorg-xrandr --noconfirm
 echo "Installing fish..."
 pacman -S fish --noconfirm
 
-echo "Installing git..."
-pacman -S git --noconfirm
+echo "Configuring fish..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/fish/config.fish > /home/$username/.config/fish/config.fish
+
+echo "Installing git and other essentials..."
+pacman -S git python python-pip pyalpm firefox ranger mpv  --noconfirm
+
+echo "Configuring ranger..."
+# TODO: Add configuration steps here!
 
 if $noptimus; then
 	echo "Configuring nVidia Optimus"
@@ -127,15 +139,6 @@ fi
 echo "Making configuration directories"
 mkdir -p /home/$username/.config/{i3,fish,polybar}
 
-echo "Configuring i3..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/i3/config > /home/$username/.config/i3/config
-
-echo "Configuring polybar"
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/polybar/config > /home/$username/.config/polybar/config
-
-echo "Configuring fish..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/fish/config.fish > /home/$username/.config/fish/config.fish
-
 echo "Cloning st..."
 git clone --depth 1 https://github.com/LukeSmithxyz/st /tmp/st
 
@@ -153,6 +156,19 @@ make
 
 echo "Installing st..."
 make install
+
+echo "Cd-ing into /tmp"
+cd /tmp
+
+echo "Downloading pikaur and cd-ing into it..."
+git clone --depth 1 https://aur.archlinux.org/pikaur.git
+cd pikaur
+
+echo "Opening PKGBUILD..."
+vim PKGBUILD
+
+echo "Installing pikaur..."
+makepkg -si
 
 echo "Getting background image..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
