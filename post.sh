@@ -79,6 +79,12 @@ fi
 echo "Installing xrandr..."
 pacman -S xorg-xrandr --noconfirm
 
+echo "Installing LightDM..."
+pacman -S lightdm lightm-gtk-greeter lightdm-openrc
+
+echo "Adding LightDM"
+rc-update add lightdm
+
 echo "Installing fish..."
 pacman -S fish --noconfirm
 
