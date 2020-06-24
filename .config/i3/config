@@ -196,13 +196,6 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-exec_always polybar example &
-exec_always xfce4-clipman &
-exec_always dunst &
-exec --no-startup-id xset r rate 300 50 &
-exec_always unclutter --timeout 3 &
-exec --no-startup-id feh --bg-fill ~/Pictures/bg.jpg
-exec --no-startup-id /mnt/sdb1/Code/sh/xcompmgr.sh &
 
 for_window [class=".*"] border pixel 0
 for_window [title="Network Settings"] floating enable 
