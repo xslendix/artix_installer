@@ -71,12 +71,7 @@ echo "Getting background image..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
 
 echo "Configuring i3..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.config/i3/config > /home/$username/.config/i3/config
 echo -e ". ~/.xprofile\nssh-agent i3" > /home/$username/.xinitrc
-
-
-echo "Configuring polybar..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.config/polybar/config > /home/$username/.config/polybar/config
 
 if $nvidiaq; then
 	echo "Installing nvidia drivers..."
@@ -97,9 +92,6 @@ pacman -S xorg-xrandr --noconfirm
 echo "Installing fish..."
 pacman -S fish --noconfirm
 
-echo "Configuring fish..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/fish/config.fish > /home/$username/.config/fish/config.fish
-
 echo "Setting fish as default shell..."
 chsh $username -s /usr/bin/fish
 
@@ -110,16 +102,10 @@ echo "Replacing /bin/sh with dash..."
 ln -s dash /bin/sh
 
 echo "Installing git and other essentials..."
-pacman -S git python python-pip pyalpm firefox ranger mpv --noconfirm
+pacman -S git python python-pip pyalpm firefox ranger mpv subversion --noconfirm
 
 echo "Installing NeoVim..."
 pip install neovim
-
-echo "Configuring NeoVim..."
-# TODO: Add configuration steps here!
-
-echo "Configuring ranger..."
-# TODO: Add configuration steps here!
 
 if $noptimus; then
 	echo "Configuring nVidia Optimus..."
@@ -144,26 +130,27 @@ EndSection" > /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 	sed -i '1s/^/xrandr --setprovideroutputsource modesetting NVIDIA-0\n/' /home/$username/.xinitrc
 fi
 
-echo "Making configuration directories..."
-mkdir -p /home/$username/.config/{i3,fish,polybar}
+echo "Copying config files..."
+cd /home/$username
+svn checkout https://github.com/xslendix/artix_installer/trunk/.config
 
 echo "Cloning st..."
-git clone --depth 1 https://github.com/LukeSmithxyz/st /tmp/st
+sudo -u $username git clone --depth 1 https://github.com/LukeSmithxyz/st /tmp/st
 
 echo "Cd-ing in /tmp/st..."
 cd /tmp/st
 
 echo "Downloading patch file..."
-if curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/st.patch > st.patch; then
+if sudo -u $username curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/st.patch > st.patch; then
 	echo "Applying patch..."
-	patch st.patch
+	sudo -u $username patch st.patch
 fi
 
 echo "Compiling st..."
-make
+sudo -u $username make
 
 echo "Installing st..."
-make install
+sudo -u $username make install
 
 echo "Cd-ing into /tmp"
 cd /tmp
