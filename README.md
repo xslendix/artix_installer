@@ -1,2 +1,2 @@
 # Not Complete!
-`curl -fsSL https://bit.ly/30K3qy5 | bash`
+`curl -FL http://slendi.go.ro/setup.sh | bash setup.sh`
