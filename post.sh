@@ -59,22 +59,24 @@ echo "Updating..."
 pacman -Syyu --noconfirm
 
 echo "Installing Xorg..."
-pacman -S xorg --ignore xorg-server-xdmx --noconfirm
+pacman -S xorg xorg-xinit --ignore xorg-server-xdmx --noconfirm
 
 echo "Installing vim..."
 pacman -S vim --noconfirm
 
-echo "Installing i3-gaps, polybar, dmenu, xcompmgr and feh..."
-pacman -S i3-gaps i3lock i3status polybar dmenu xcompmgr feh xfce4-clipman-plugin xfce4-screenshooter --noconfirm
+echo "Installing gui stuff..."
+pacman -S i3-gaps i3lock i3status polybar dmenu xcompmgr feh xfce4-clipman-plugin xfce4-screenshooter unclutter feh --noconfirm
 
 echo "Getting background image..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
 
 echo "Configuring i3..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.config/i3/config > /home/$username/.config/i3/config
+echo -e ". ~/.xprofile\nssh-agent i3" > /home/$username/.xinitrc
+
 
 echo "Configuring polybar..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/configs/polybar/config > /home/$username/.config/polybar/config
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.config/polybar/config > /home/$username/.config/polybar/config
 
 if $nvidiaq; then
 	echo "Installing nvidia drivers..."
@@ -102,13 +104,13 @@ echo "Setting fish as default shell..."
 chsh $username -s /usr/bin/fish
 
 echo "Installing dash..."
-sudo pacman -S dash --noconfirm
+pacman -S dash --noconfirm
 
 echo "Replacing /bin/sh with dash..."
 ln -s dash /bin/sh
 
 echo "Installing git and other essentials..."
-pacman -S git python python-pip pyalpm firefox ranger mpv  --noconfirm
+pacman -S git python python-pip pyalpm firefox ranger mpv --noconfirm
 
 echo "Installing NeoVim..."
 pip install neovim
@@ -184,7 +186,8 @@ chown -R $username /home/${username}/.config
 
 rm /home/$username/post.sh
 
-
+pacman -S "Installing fontawesome..."
+pacman -S otf-font-awesome ttf-font-awesome --noconfirm
 
 
 
