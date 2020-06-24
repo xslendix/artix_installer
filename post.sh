@@ -67,9 +67,6 @@ pacman -S vim --noconfirm
 echo "Installing gui stuff..."
 pacman -S i3-gaps i3lock i3status polybar dmenu xcompmgr feh xfce4-clipman-plugin xfce4-screenshooter unclutter feh --noconfirm
 
-echo "Getting background image..."
-curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
-
 echo "Configuring i3..."
 echo -e ". ~/.xprofile\nssh-agent i3" > /home/$username/.xinitrc
 
@@ -134,6 +131,9 @@ echo "Copying config files..."
 cd /home/$username
 svn checkout https://github.com/xslendix/artix_installer/trunk/.config
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.xprofile > /home/$username/.xprofile
+
+echo "Getting background image..."
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
 
 echo "Cloning st..."
 sudo -u $username git clone --depth 1 https://github.com/LukeSmithxyz/st /tmp/st
