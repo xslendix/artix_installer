@@ -1,0 +1,9 @@
+#!/bin/sh
+
+polybar example &
+xfce4-clipman &
+dunst &
+xset r rate 300 50 &
+unclutter --timeout 3 &
+feh --bg-fill ~/.config/i3/bg.jpg
+/mnt/sdb1/Code/sh/xcompmgr.sh &
