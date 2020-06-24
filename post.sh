@@ -133,6 +133,7 @@ fi
 echo "Copying config files..."
 cd /home/$username
 svn checkout https://github.com/xslendix/artix_installer/trunk/.config
+curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.xprofile > /home/$username/.xprofile
 
 echo "Cloning st..."
 sudo -u $username git clone --depth 1 https://github.com/LukeSmithxyz/st /tmp/st
