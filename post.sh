@@ -102,6 +102,7 @@ echo "Installing git and other essentials..."
 pacman -S git python python-pip pyalpm firefox ranger mpv subversion --noconfirm
 
 echo "Installing NeoVim..."
+pacman -S neovim --noconfirm
 pip install neovim
 
 if $noptimus; then
@@ -131,6 +132,9 @@ echo "Copying config files..."
 cd /home/$username
 svn checkout https://github.com/xslendix/artix_installer/trunk/.config
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.xprofile > /home/$username/.xprofile
+
+echo "Installing NeoVim plug-ins..."
+nvim +PlugInstall +UpdateRemotePlugins +qall
 
 echo "Getting background image..."
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/bg.jpg > /home/$username/.config/i3/bg.jpg
