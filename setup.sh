@@ -91,7 +91,7 @@ fi
 pacman -Syy
 
 echo "Installing base system..."
-basestrap /mnt base base-devel openrc
+basestrap /mnt base base-devel runit elogind-runit
 
 echo "Installing the Linux kernel..."
 basestrap /mnt linux linux-firmware
@@ -135,7 +135,7 @@ echo "pacman -S dhcpcd --noconfirm" | artools-chroot /mnt
 
 echo "Installing connman..."
 
-echo "pacman -S connman-openrc connman-gtk --noconfirm; rc-update add connmand" | artools-chroot /mnt
+echo "pacman -S connman-runit connman-gtk --noconfirm; ln -s /etc/runit/sv/connmand /run/runit/service" | artools-chroot /mnt
 
 {
 echo "Unmounting partitions..."
