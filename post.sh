@@ -148,7 +148,7 @@ cd /tmp/st
 echo "Downloading patch file..."
 if sudo -u $username curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/st.patch > st.patch; then
 	echo "Applying patch..."
-	sudo -u $username patch st.patch
+	sudo -u $username patch 0i st.patch
 fi
 
 echo "Compiling st..."
