@@ -105,6 +105,9 @@ echo "Installing NeoVim..."
 pacman -S neovim --noconfirm
 pip install neovim
 
+echo "Installing newsboat, ranger and mpv..."
+pacman -S newsboat ranger mpv --noconfirm
+
 if $noptimus; then
 	echo "Configuring nVidia Optimus..."
 	echo "Section "OutputClass"
