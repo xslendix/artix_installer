@@ -137,6 +137,9 @@ cd /home/$username
 svn checkout https://github.com/xslendix/artix_installer/trunk/.config
 curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.xprofile > /home/$username/.xprofile
 
+cd /home/$username
+svn checkout 'https://github.com/xslendix/artix_installer/trunk/.local'
+
 echo "Installing NeoVim plug-ins..."
 nvim +PlugInstall +UpdateRemotePlugins +qall
 
