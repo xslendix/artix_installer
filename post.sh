@@ -182,6 +182,7 @@ pacman -S "Installing fontawesome..."
 pacman -S otf-font-awesome ttf-font-awesome --noconfirm
 
 chown -R $username /home/${username}
+chmod +w -R $username /home/${username}
 
 
 

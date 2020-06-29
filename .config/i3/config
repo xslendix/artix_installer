@@ -205,8 +205,8 @@ exec_always --no-startup-id xfce4-clipman &
 exec_always --no-startup-id dunst &
 exec --no-startup-id xset r rate 300 50 &
 exec_always --no-startup-id unclutter --timeout 3 &
-exec --no-startup-id wal -i ~/Pictures/bg.jpg -o "$HOME/.config/wal/postrun" -b "#000011" >/dev/null 2>&1
-exec --no-startup-id feh --bg-fill ~/Pictures/bg.jpg &
+exec --no-startup-id wal -i ~/.config/i3/bg.jpg -o "$HOME/.config/wal/postrun" -b "#000011" >/dev/null 2>&1
+exec --no-startup-id feh --bg-fill ~/.config/i3/bg.jpg &
 exec --no-startup-id ~/.local/bin/xcompmgr.sh &
 
 for_window [class=".*"] border pixel 0
