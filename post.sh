@@ -139,6 +139,7 @@ curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/.xp
 
 cd /home/$username
 svn checkout 'https://github.com/xslendix/artix_installer/trunk/.local'
+chmod +x -R /home/$username/.local/bin
 
 echo "Installing NeoVim plug-ins..."
 nvim +PlugInstall +UpdateRemotePlugins +qall
@@ -155,7 +156,7 @@ cd /tmp/st
 echo "Downloading patch file..."
 if sudo -u $username curl -fsSL https://raw.githubusercontent.com/xslendix/artix_installer/master/st.patch > st.patch; then
 	echo "Applying patch..."
-	sudo -u $username patch 0i st.patch
+	sudo -u $username patch -i st.patch
 fi
 
 echo "Compiling st..."
@@ -179,8 +180,6 @@ chown -R $username .
 su $username bash -c "makepkg -si"
 pacman -U *.tar.xz
 
-rm /home/$username/post.sh
-
 pacman -S "Installing fontawesome..."
 pacman -S otf-font-awesome ttf-font-awesome --noconfirm
 
@@ -190,6 +189,7 @@ pacman -S dunst python-pywal --noconfirm
 chmod +w -R /home/${username}
 chown -R $username /home/${username}
 
+rm /home/$username/post.sh
 
 
 
