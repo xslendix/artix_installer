@@ -1,8 +1,7 @@
 Only in st_mod: blinking.diff
-Only in st_mod: boxdraw.o
 diff -ur st/config.h st_mod/config.h
 --- st/config.h	2020-06-25 21:25:41.339454468 +0300
-+++ st_mod/config.h	2020-06-02 15:30:16.996529243 +0300
++++ st_mod/config.h	2020-06-29 11:25:19.172155994 +0300
 @@ -5,9 +5,13 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -20,7 +19,7 @@ diff -ur st/config.h st_mod/config.h
  
  /*
   * What program is execed by st depends of these precedence rules:
-@@ -107,43 +111,42 @@
+@@ -107,8 +111,7 @@
   */
  unsigned int tabspaces = 8;
  
@@ -28,71 +27,8 @@ diff -ur st/config.h st_mod/config.h
 -float alpha = 0.8;
 +float alpha = 0.7;
  
--/* Terminal colors (16 first used in escape sequence) */
+ /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
--	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
--	"#cc241d",
--	"#98971a",
--	"#d79921",
--	"#458588",
--	"#b16286",
--	"#689d6a",
--	"#a89984",
--	"#928374",
--	"#fb4934",
--	"#b8bb26",
--	"#fabd2f",
--	"#83a598",
--	"#d3869b",
--	"#8ec07c",
--	"#ebdbb2",
--	[255] = 0,
--	/* more colors can be added after 255 to use with DefaultXX */
--	"#add8e6", /* 256 -> cursor */
--	"#555555", /* 257 -> rev cursor*/
--	"#282828", /* 258 -> bg */
--	"#ebdbb2", /* 259 -> fg */
--};
- 
-+  /* 8 normal colors */
-+  [0] = "#111111", /* black   */
-+  [1] = "#ac0000", /* red     */
-+  [2] = "#2ea200", /* green   */
-+  [3] = "#e2a800", /* yellow  */
-+  [4] = "#0060af", /* blue    */
-+  [5] = "#9300c4", /* magenta */
-+  [6] = "#009985", /* cyan    */
-+  [7] = "#bfbfbf", /* white   */
-+
-+  /* 8 bright colors */
-+  [8]  = "#414141", /* black   */
-+  [9]  = "#ff4646", /* red     */
-+  [10] = "#4add2b", /* green   */
-+  [11] = "#e8be4d", /* yellow  */
-+  [12] = "#57b2ff", /* blue    */
-+  [13] = "#d16cee", /* magenta */
-+  [14] = "#00ebcb", /* cyan    */
-+  [15] = "#ededed", /* white   */
-+
-+  /* special colors */
-+  [256] = "#000000", /* background */
-+  [257] = "#ffffff", /* foreground */
-+};
- 
- /*
-  * Default colors (colorname index)
-- * foreground, background, cursor, reverse cursor
-+ * foreground, background, cursor
-  */
--unsigned int defaultfg = 259;
--unsigned int defaultbg = 258;
--unsigned int defaultcs = 256;
-+unsigned int defaultfg = 257;
-+unsigned int defaultbg = 256;
-+unsigned int defaultcs = 257;
- unsigned int defaultrcs = 257;
- 
- /*
 @@ -153,7 +156,7 @@
   * 6: Bar ("|")
   * 7: Snowman ("☃")
@@ -103,7 +39,6 @@ diff -ur st/config.h st_mod/config.h
  /*
   * Default columns and rows numbers
 Only in st: FUNDING.yml
-Only in st_mod: st
 diff -ur st/st.h st_mod/st.h
 --- st/st.h	2020-06-25 21:25:41.339454468 +0300
 +++ st_mod/st.h	2020-06-02 14:46:59.839923953 +0300
@@ -120,7 +55,6 @@ diff -ur st/st.h st_mod/st.h
  enum selection_mode {
  	SEL_IDLE = 0,
  	SEL_EMPTY = 1,
-Only in st_mod: st.o
 diff -ur st/x.c st_mod/x.c
 --- st/x.c	2020-06-25 21:25:41.342787801 +0300
 +++ st_mod/x.c	2020-06-02 15:12:28.273221170 +0300
@@ -326,4 +260,3 @@ diff -ur st/x.c st_mod/x.c
  
  	/* Waiting for window mapping */
  	do {
-Only in st_mod: x.o
