@@ -181,8 +181,11 @@ rm /home/$username/post.sh
 pacman -S "Installing fontawesome..."
 pacman -S otf-font-awesome ttf-font-awesome --noconfirm
 
+pacman -S "Installing dunst, pywal"
+pacman -S dunst python-pywal --noconfirm
+
+chmod +w -R /home/${username}
 chown -R $username /home/${username}
-chmod +w -R $username /home/${username}
 
 
 
