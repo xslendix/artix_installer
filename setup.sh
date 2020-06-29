@@ -135,7 +135,7 @@ echo "pacman -S dhcpcd --noconfirm" | artools-chroot /mnt
 
 echo "Installing connman..."
 
-echo "pacman -S connman-runit connman-gtk --noconfirm; ln -s /etc/runit/sv/connmand /run/runit/service" | artools-chroot /mnt
+echo "pacman -S connman-runit connman-gtk --noconfirm; ln -s /etc/runit/sv/connmand /etc/runit/runsvdir/current/service" | artools-chroot /mnt
 
 {
 echo "Unmounting partitions..."
