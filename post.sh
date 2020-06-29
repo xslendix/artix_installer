@@ -10,6 +10,8 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
+ln -s /etc/runit/sv/connmand /run/runit/service/.
+sv start connmand
 
 echo "Giving permissions"
 usermod -a -G video,audio,input,power,storage,optical,lp,scanner,dbus,adbusers,uucp,vboxusers $username
