@@ -10,7 +10,6 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-chown -R $username /home/${username}/.config
 
 echo "Giving permissions"
 usermod -a -G video,audio,input,power,storage,optical,lp,scanner,dbus,adbusers,uucp,vboxusers $username
@@ -158,7 +157,7 @@ echo "Compiling st..."
 sudo -u $username make
 
 echo "Installing st..."
-sudo -u $username make install
+make install
 
 echo "Cd-ing into /tmp"
 cd /tmp
@@ -170,20 +169,17 @@ cd pikaur
 echo "Opening PKGBUILD..."
 vim PKGBUILD
 
-chown -R $username /home/${username}/.config
-
 echo "Installing pikaur..."
 chown -R $username .
 su $username bash -c "makepkg -si"
 pacman -U *.tar.xz
-
-chown -R $username /home/${username}/.config
 
 rm /home/$username/post.sh
 
 pacman -S "Installing fontawesome..."
 pacman -S otf-font-awesome ttf-font-awesome --noconfirm
 
+chown -R $username /home/${username}
 
 
 
