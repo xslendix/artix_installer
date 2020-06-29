@@ -180,8 +180,8 @@ chown -R $username .
 su $username bash -c "makepkg -si"
 pacman -U *.tar.xz
 
-pacman -S "Installing fontawesome..."
-pacman -S otf-font-awesome ttf-font-awesome --noconfirm
+pacman -S "Installing some nice fonts..."
+pacman -S otf-font-awesome ttf-font-awesome ttf-roboto-mono ttf-roboto --noconfirm
 
 pacman -S "Installing dunst, pywal"
 pacman -S dunst python-pywal --noconfirm
