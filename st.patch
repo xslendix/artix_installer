@@ -1,7 +1,7 @@
 Only in st_mod: blinking.diff
 diff -ur st/config.h st_mod/config.h
 --- st/config.h	2020-06-25 21:25:41.339454468 +0300
-+++ st_mod/config.h	2020-06-29 11:25:19.172155994 +0300
++++ st_mod/config.h	2020-07-04 12:42:58.969947472 +0300
 @@ -5,9 +5,13 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -15,7 +15,7 @@ diff -ur st/config.h st_mod/config.h
 +static int borderpx = 4;
 +
 +static unsigned int xfps = 60;
-+static unsigned int actionfps = 30;
++static unsigned int actionfps = 60;
  
  /*
   * What program is execed by st depends of these precedence rules:
@@ -25,7 +25,7 @@ diff -ur st/config.h st_mod/config.h
  
 -/* bg opacity */
 -float alpha = 0.8;
-+float alpha = 0.7;
++float alpha = 0.6;
  
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {

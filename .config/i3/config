@@ -209,6 +209,8 @@ exec --no-startup-id wal -i ~/.config/i3/bg.jpg -o "$HOME/.config/wal/postrun" -
 exec --no-startup-id feh --bg-fill ~/.config/i3/bg.jpg &
 exec --no-startup-id ~/.local/bin/xcompmgr.sh &
 
+exec --no-startup-id setxkbmap -option caps:swapescape
+
 for_window [class=".*"] border pixel 0
 for_window [title="Network Settings"] floating enable 
 for_window [class="mpv"] floating enable
